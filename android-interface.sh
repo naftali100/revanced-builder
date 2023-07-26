@@ -56,7 +56,7 @@ error() {
 
 dload_and_install() {
   log "Downloading revanced-builder..."
-  curl -sLo revanced-builder.zip https://github.com/reisxd/revanced-builder/archive/refs/heads/main.zip
+  curl -sLo revanced-builder.zip https://github.com/IffyWiFi/revanced-builder/archive/refs/heads/main.zip
   log "Unzipping..."
   unzip -qqo revanced-builder.zip
   rm revanced-builder.zip
@@ -201,9 +201,9 @@ run_self_update() {
 
   # Download new version
   log "Downloading latest version..."
-  ! curl -sLo "$SCR_NAME_EXEC_FP".tmp https://raw.githubusercontent.com/reisxd/revanced-builder/main/android-interface.sh && {
+  ! curl -sLo "$SCR_NAME_EXEC_FP".tmp https://raw.githubusercontent.com/IffyWiFi/revanced-builder/main/android-interface.sh && {
     log "Failed: Error while trying to download new version!"
-    error "File requested: https://raw.githubusercontent.com/reisxd/revanced-builder/main/android-interface.sh" n
+    error "File requested: https://raw.githubusercontent.com/IffyWiFi/revanced-builder/main/android-interface.sh" n
   } || log "Done."
 
   # Copy over modes from old version

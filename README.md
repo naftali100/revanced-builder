@@ -1,11 +1,5 @@
 # ReVanced Builder
 
-## NOTICE
-
-ReVanced Builder is discontinued, and RVB v4 is postponed indefinitely. Thanks for everyone who has used ReVanced Builder before. I have made an another project, [TizenTube](https://github.com/reisxd/TizenTube). In short, TizenTube is a way to experience ad-free and sponsor-free YT experience on your Tizen TVs. 
-
----
-
 This project will allow you to download the APK of any of the [officially supported](https://github.com/revanced/revanced-patches#-patches) apps and build ReVanced easily!
 
 ## Required
@@ -22,7 +16,7 @@ If you are on a PC, download the latest executable from [here](https://github.co
 
 ## For developers
 
-For developers, see [this](https://github.com/reisxd/revanced-builder/blob/main/DEVELOPERS.md)
+For developers, see [this](https://github.com/IffyWiFi/revanced-builder/blob/main/DEVELOPERS.md)
 
 ## How to use (Docker)
 
