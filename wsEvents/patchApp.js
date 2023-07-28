@@ -156,6 +156,8 @@ module.exports = async function patchApp(ws) {
     global.jarNames.cli,
     '-b',
     global.jarNames.patchesJar,
+    '-m',
+    global.jarNames.integrations,
     '-t',
     './revanced-cache',
     '--experimental',
