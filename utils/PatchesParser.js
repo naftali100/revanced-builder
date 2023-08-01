@@ -10,9 +10,8 @@ module.exports = async function parsePatch(packageName, hasRoot) {
   );
 
   const rootedPatches = [
-    'microg-support',
-    'hide-cast-button',
-    'music-microg-support'
+    'Vanced MicroG support',
+    'Hide cast button',
   ];
   const patches = [];
 
@@ -48,7 +47,11 @@ module.exports = async function parsePatch(packageName, hasRoot) {
     if (isRooted && !hasRoot) continue;
 
     for (const dependencyName of patch.dependencies) {
-      if (dependencyName.includes('integrations')) {
+      if (
+        dependencyName.includes('integrations') ||
+        dependencyName.includes('Integrations') ||
+        dependencyName.includes('INTEGRATIONS')
+      ) {
         global.jarNames.patch.integrations = true;
       } else {
         if (!global.jarNames.patch.integrations) {
