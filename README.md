@@ -2,6 +2,10 @@
 
 ## NOTICE
 
+### UPDATE
+I'll be trying to take up the development but not sure till when I'll keep it updated since don't have much time.
+---
+
 ReVanced Builder is discontinued, and RVB v4 is postponed indefinitely. Thanks for everyone who has used ReVanced Builder before. I have made an another project, [TizenTube](https://github.com/reisxd/TizenTube). In short, TizenTube is a way to experience ad-free and sponsor-free YT experience on your Tizen TVs. 
 
 ---
