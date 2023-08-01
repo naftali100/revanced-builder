@@ -28,6 +28,18 @@ async function runCommand(command, deviceId) {
 module.exports = async function mountReVancedInstaller(deviceId) {
   let pkg = global.jarNames.selectedApp.packageName;
 
+  // await exec(`adb install input.apk
+  //               java -jar ${global.jarNames.cli} \
+  //               -a input.apk \
+  //               -o patched-output.apk \
+  //               -b ${global.jarNames.patchesJar} \
+  //               -e vanced-microg-support \
+  //               -d ${deviceId} \
+  //               -m ${global.jarNames.integrations} \
+  //               -i remove-player-controls-background \
+  //               -i predictive-back-gesture \
+  //               --mount`);
+
   // Copy ReVanced APK to temp.
   await exec(
     `adb -s ${deviceId} push "${joinPath(
@@ -84,7 +96,6 @@ module.exports = async function mountReVancedInstaller(deviceId) {
     `su -mm -c '"/data/adb/service.d/mount_revanced_${pkg}.sh"'`,
     deviceId
   );
-
   // Restart app
   await runCommand(
     `su -c 'monkey -p ${pkg} 1 && kill $(pidof -s ${pkg})'`,
