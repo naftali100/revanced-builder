@@ -11,7 +11,6 @@ module.exports = async function parsePatch(packageName, hasRoot) {
 
   const rootedPatches = [
     'microg-support',
-    'hide-cast-button',
     'music-microg-support'
   ];
   const patches = [];
@@ -23,7 +22,7 @@ module.exports = async function parsePatch(packageName, hasRoot) {
   };
 
   for (const patch of patchesList) {
-    const isRooted = rootedPatches.includes(patch.name);
+    const isRooted = rootedPatches.includes(patch.name.toLowerCase().replaceAll(' ', '-'));
 
     // Check if the patch is compatible:
     let isCompatible = false;
@@ -48,7 +47,7 @@ module.exports = async function parsePatch(packageName, hasRoot) {
     if (isRooted && !hasRoot) continue;
 
     for (const dependencyName of patch.dependencies) {
-      if (dependencyName.includes('integrations')) {
+      if (dependencyName.toLowerCase().includes('integrations')) {
         global.jarNames.patch.integrations = true;
       } else {
         if (!global.jarNames.patch.integrations) {
@@ -58,7 +57,7 @@ module.exports = async function parsePatch(packageName, hasRoot) {
     }
 
     patches.push({
-      name: patch.name,
+      name: patch.name.toLowerCase().replaceAll(' ', '-'),
       description: patch.description,
       maxVersion: compatibleVersion || ' ',
       isRooted,
