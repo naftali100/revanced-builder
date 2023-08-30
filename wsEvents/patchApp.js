@@ -169,10 +169,10 @@ module.exports = async function patchApp(ws) {
     args.push(join(global.revancedDir, 'aapt2'));
   }
 
-  if (global.jarNames.patch.integrations) {
-    args.push('-m');
-    args.push(global.jarNames.integrations);
-  }
+  args.push('-m');
+  args.push(global.jarNames.integrations);
+  // if (global.jarNames.patch.integrations) {
+  // }
 
   args.push(...global.jarNames.patches.split(' '));
 
