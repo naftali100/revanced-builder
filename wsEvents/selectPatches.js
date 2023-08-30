@@ -13,7 +13,7 @@ module.exports = function selectPatches(message) {
   let isFirstElement = true;
 
   for (const patch of message.selectedPatches) {
-    const patchName = patch.replace(/\|.+$/, '').replace(/\s/g, '');
+    const patchName = patch.toLowerCase().replaceAll(' ', '-').replace(/\|.+$/, '').replace(/\s/g, '');
 
     includedPatchesArray.push(patchName);
 
@@ -30,7 +30,7 @@ module.exports = function selectPatches(message) {
 
     if (includedPatchesArray.includes(patchName)) continue;
 
-    if (patch.includes('microg-support')) global.jarNames.isRooted = true;
+    if (patch.includes('microg-support') || patch.includes('MicroG support')) global.jarNames.isRooted = true;
 
     global.jarNames.patches += ` -e ${patchName}`;
   }
