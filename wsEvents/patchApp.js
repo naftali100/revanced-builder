@@ -95,8 +95,8 @@ function outputName() {
   let part2 = global.jarNames?.selectedApp?.appName
     ? global.jarNames.selectedApp.appName.replace(/[^a-zA-Z0-9\\.\\-]/g, '')
     : global?.jarNames?.packageName
-    ? global.jarNames.packageName.replace(/\./g, '')
-    : ''; // make the app name empty if we cannot detect it
+      ? global.jarNames.packageName.replace(/\./g, '')
+      : ''; // make the app name empty if we cannot detect it
 
   // TODO: If the existing input APK is used from revanced/ without downloading, version and arch aren't set
   const part3 = global?.apkInfo?.version ? `v${global.apkInfo.version}` : '';
@@ -177,6 +177,11 @@ module.exports = async function patchApp(ws) {
   args.push(...global.jarNames.patches.split(' '));
 
   const buildProcess = spawn(global.javaCmd, args);
+
+  buildProcess.addListener('close', async (code) => {
+    if (code === 0) await afterBuild(ws);
+    // else throw new Error('An error occurred while patching.');
+  })
 
   buildProcess.stdout.on('data', async (data) => {
     ws.send(
