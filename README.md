@@ -1,7 +1,7 @@
 # ReVanced Builder
 
 ## NOTICE
-this fork is for my personal need which is patching youtube app on linux, i'll try to keep this up with renaved update, but only make sure youtube patching on linux working and nothing else
+this fork is for my personal need which is patching youtube app on linux, i'll try to keep this up with revanced update, but only make sure youtube patching on linux working and nothing else
 ---
 
 This project will allow you to download the APK of any of the [officially supported](https://github.com/revanced/revanced-patches#-patches) apps and build ReVanced easily!
