@@ -29,7 +29,6 @@ async function mount(ws) {
 async function afterBuild(ws) {
   // HACK: Kill Java after build is done to prevent EBUSY errors while deleting the cache
   killProcess('java');
-  rmSync('revanced-cache', { recursive: true, force: true });
   outputName();
   renameSync(
     join(global.revancedDir, 'revanced.apk'),
@@ -154,15 +153,13 @@ module.exports = async function patchApp(ws) {
   const args = [
     '-jar',
     global.jarNames.cli,
-    '-b',
+    'patch',
+    '-b', // patch bundle
     global.jarNames.patchesJar,
-    '-t',
-    './revanced-cache',
-    '--experimental',
-    '-a',
-    `${join(global.revancedDir, global.jarNames.selectedApp.packageName)}.apk`,
-    '-o',
-    join(global.revancedDir, 'revanced.apk')
+    '-p', // purge cache
+    '-o', // output file
+    join(global.revancedDir, 'revanced.apk'),
+    `${join(global.revancedDir, global.jarNames.selectedApp.packageName)}.apk`
   ];
 
   if (process.platform === 'android') {
@@ -187,7 +184,7 @@ module.exports = async function patchApp(ws) {
       })
     );
 
-    if (data.toString().includes('Finished')) await afterBuild(ws);
+    if (data.toString().includes('Purged ')) await afterBuild(ws);
 
     if (data.toString().includes('INSTALL_FAILED_UPDATE_INCOMPATIBLE')) {
       await reinstallReVanced(ws);
@@ -205,7 +202,7 @@ module.exports = async function patchApp(ws) {
       })
     );
 
-    if (data.toString().includes('Finished')) await afterBuild(ws);
+    if (data.toString().includes('Purged ')) await afterBuild(ws);
 
     if (data.toString().includes('INSTALL_FAILED_UPDATE_INCOMPATIBLE')) {
       await reinstallReVanced(ws);
