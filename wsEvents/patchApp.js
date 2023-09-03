@@ -154,13 +154,12 @@ module.exports = async function patchApp(ws) {
   const args = [
     '-jar',
     global.jarNames.cli,
+    'patch',
+    `${join(global.revancedDir, global.jarNames.selectedApp.packageName)}.apk`,
     '-b',
     global.jarNames.patchesJar,
-    '-t',
+    '-r',
     './revanced-cache',
-    '--experimental',
-    '-a',
-    `${join(global.revancedDir, global.jarNames.selectedApp.packageName)}.apk`,
     '-o',
     join(global.revancedDir, 'revanced.apk')
   ];
@@ -178,6 +177,11 @@ module.exports = async function patchApp(ws) {
   args.push(...global.jarNames.patches.split(' '));
 
   const buildProcess = spawn(global.javaCmd, args);
+
+  buildProcess.addListener('close', async (code) => {
+    if (code === 0) await afterBuild(ws);
+    // else throw new Error('An error occurred while patching.');
+  })
 
   buildProcess.stdout.on('data', async (data) => {
     ws.send(
