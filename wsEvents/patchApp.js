@@ -156,6 +156,8 @@ module.exports = async function patchApp(ws) {
     'patch',
     '-b', // patch bundle
     global.jarNames.patchesJar,
+    '-m', // merge integrations
+    global.jarNames.integrations,
     '-p', // purge cache
     '-o', // output file
     join(global.revancedDir, 'revanced.apk'),
@@ -165,11 +167,6 @@ module.exports = async function patchApp(ws) {
   if (process.platform === 'android') {
     args.push('--custom-aapt2-binary');
     args.push(join(global.revancedDir, 'aapt2'));
-  }
-
-  if (global.jarNames.patch.integrations) {
-    args.push('-m');
-    args.push(global.jarNames.integrations);
   }
 
   args.push(...global.jarNames.patches.split(' '));
