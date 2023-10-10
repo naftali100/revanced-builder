@@ -29,11 +29,13 @@ module.exports = async function parsePatch(packageName, hasRoot) {
     /** @type {string} */
     let compatibleVersion;
 
+    if (patch.compatiblePackages === null) continue;
+
     for (const pkg of patch.compatiblePackages)
       if (pkg.name === packageName) {
         isCompatible = true;
 
-        if (pkg.versions.length !== 0) {
+        if (pkg.versions !== null) {
           compatibleVersion = pkg.versions.at(-1);
 
           global.versions.push(compatibleVersion);
@@ -58,7 +60,7 @@ module.exports = async function parsePatch(packageName, hasRoot) {
 
     patches.push({
       name: patch.name.toLowerCase().replaceAll(' ', '-'),
-      description: patch.description,
+      description: patch.description || ' ',
       maxVersion: compatibleVersion || ' ',
       isRooted,
       excluded: patch.excluded || patch.deprecated
